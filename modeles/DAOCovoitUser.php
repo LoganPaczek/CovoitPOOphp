@@ -126,6 +126,11 @@ function updateUnCovoitUser($unCovoitUser){
 			$fieldsToUpdate[$colonne] = $nouvelleValeur;
 		}
 	}
+
+	if ($nouveauMdp === "" || password_verify($nouveauMdp, $ancienCovoitUser->getMdp())) {
+	} else {
+		$fieldsToUpdate["mdp"] = password_hash($nouveauMdp, PASSWORD_DEFAULT);
+	}
 	
 	if(count($fieldsToUpdate) !== 0){
 		$set = [];
